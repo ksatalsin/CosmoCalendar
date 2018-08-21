@@ -2,12 +2,11 @@ package com.applikeysolutions.cosmocalendar.selection;
 
 import android.support.annotation.NonNull;
 
+import com.applikeysolutions.cosmocalendar.listeners.OnDaySelectedListener;
 import com.applikeysolutions.cosmocalendar.model.Day;
 import com.applikeysolutions.cosmocalendar.selection.criteria.BaseCriteria;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;

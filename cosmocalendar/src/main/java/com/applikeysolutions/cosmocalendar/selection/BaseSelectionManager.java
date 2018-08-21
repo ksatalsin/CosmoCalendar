@@ -2,6 +2,7 @@ package com.applikeysolutions.cosmocalendar.selection;
 
 import android.support.annotation.NonNull;
 
+import com.applikeysolutions.cosmocalendar.listeners.OnDaySelectedListener;
 import com.applikeysolutions.cosmocalendar.model.Day;
 
 public abstract class BaseSelectionManager {

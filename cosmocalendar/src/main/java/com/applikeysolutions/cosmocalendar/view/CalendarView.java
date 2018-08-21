@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.applikeysolutions.cosmocalendar.dialog.OnDaysSelectionListener;
 import com.applikeysolutions.cosmocalendar.selection.NoneSelectionManager;
 import com.applikeysolutions.cosmocalendar.FetchMonthsAsyncTask;
 import com.applikeysolutions.cosmocalendar.adapter.MonthAdapter;
@@ -37,7 +38,7 @@ import com.applikeysolutions.cosmocalendar.model.Day;
 import com.applikeysolutions.cosmocalendar.model.Month;
 import com.applikeysolutions.cosmocalendar.selection.BaseSelectionManager;
 import com.applikeysolutions.cosmocalendar.selection.MultipleSelectionManager;
-import com.applikeysolutions.cosmocalendar.selection.OnDaySelectedListener;
+import com.applikeysolutions.cosmocalendar.listeners.OnDaySelectedListener;
 import com.applikeysolutions.cosmocalendar.selection.RangeSelectionManager;
 import com.applikeysolutions.cosmocalendar.selection.SingleSelectionManager;
 import com.applikeysolutions.cosmocalendar.selection.selectionbar.MultipleSelectionBarAdapter;
@@ -99,6 +100,7 @@ public class CalendarView extends RelativeLayout implements OnDaySelectedListene
     private int lastVisibleMonthPosition = SettingsManager.DEFAULT_MONTH_COUNT / 2;
 
     private FetchMonthsAsyncTask asyncTask;
+    private OnDaysSelectionListener daySelectedListener;
 
     public CalendarView(Context context) {
         super(context);
@@ -128,6 +130,10 @@ public class CalendarView extends RelativeLayout implements OnDaySelectedListene
         if(asyncTask != null && !asyncTask.isCancelled()){
             asyncTask.cancel(false);
         }
+    }
+    public void setDaySelectionListener(OnDaysSelectionListener daySelectedListener){
+        this.daySelectedListener = daySelectedListener;
+
     }
 
     private void handleAttributes(AttributeSet attrs, int defStyle, int defStyleRes) {
@@ -633,6 +639,9 @@ public class CalendarView extends RelativeLayout implements OnDaySelectedListene
     public void onDaySelected() {
         selectedDays = getSelectedDays();
         displaySelectedDays();
+
+        if(daySelectedListener!=null)
+        daySelectedListener.onDaysSelected(selectedDays);
     }
 
     /**
